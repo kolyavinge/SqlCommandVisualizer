@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Data.SqlClient;
 using System.Windows;
 
 namespace SqlCommandVisualizerTestApp
@@ -23,7 +17,6 @@ namespace SqlCommandVisualizerTestApp
 
             var cmd = new SqlCommand("select * from table where id = @id");
             cmd.Parameters.AddWithValue("id", 16);
-            cmd.ExecuteNonQuery();
         }
     }
 }
