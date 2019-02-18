@@ -23,7 +23,16 @@
             </Button.Content>
         </Button>
 
-        <CheckBox Content="Word wrap" x:Name="cbIsWordWrap" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="150,0,0,4" />
+        <Button VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="138,0,0,0" Width="130" Height="23" Click="OpenInSSMSClick">
+            <Button.Content>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="Images/ssms.png" RenderOptions.BitmapScalingMode="NearestNeighbor" RenderOptions.EdgeMode="Aliased" Width="16" Height="16" Margin="0,0,4,0" />
+                    <TextBlock Text="Open in SSMS" />
+                </StackPanel>
+            </Button.Content>
+        </Button>
+
+        <CheckBox Content="Word wrap" x:Name="cbIsWordWrap" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="275,0,0,4" />
 
         <Button VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Height="23" Click="CloseClick">
             <Button.Content>

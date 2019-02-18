@@ -29,5 +29,10 @@ namespace SqlCommandVisualizer
         {
             Close();
         }
+
+        private void OpenInSSMSClick(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
