@@ -1,13 +1,8 @@
 ﻿using Microsoft.VisualStudio.DebuggerVisualizers;
 using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 [assembly: DebuggerVisualizer(
 typeof(SqlCommandVisualizer.SqlCommandVisualizer),
@@ -30,9 +25,28 @@ namespace SqlCommandVisualizer
 
         public void ShowDialog(string rawSql)
         {
+            var configManager = new SqlVisualizerConfigManager();
+            var configSettings = configManager.LoadConfigSettings();
+
             var view = new SqlCommandVisualizerView();
+            if (configSettings.IsMaximized)
+            {
+                view.WindowState = System.Windows.WindowState.Maximized;
+            }
+            else
+            {
+                view.Width = configSettings.MainWindowWidth;
+                view.Height = configSettings.MainWindowHeight;
+            }
             view.textEditor.Text = rawSql;
+            view.cbIsWordWrap.IsChecked = configSettings.IsWordWrap;
             view.ShowDialog();
+
+            configSettings.IsMaximized = view.WindowState == System.Windows.WindowState.Maximized;
+            configSettings.MainWindowWidth = view.Width;
+            configSettings.MainWindowHeight = view.Height;
+            configSettings.IsWordWrap = view.cbIsWordWrap.IsChecked ?? false;
+            configManager.SaveConfigSettings(configSettings);
         }
     }
 
@@ -57,7 +71,7 @@ namespace SqlCommandVisualizer
     {
         public SqlCommandWrapper(SqlCommand sqlCommand)
         {
-            RawSql = sqlCommand.GetRawSql();
+            RawSql = sqlCommand.GetRawSql().Trim();
         }
 
         public string RawSql { get; private set; }

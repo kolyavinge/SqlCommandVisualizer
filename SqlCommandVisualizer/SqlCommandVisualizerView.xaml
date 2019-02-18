@@ -5,15 +5,33 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        ShowInTaskbar="False"
+        Icon="Images/main_window.png"
+        Title="SqlCommand Visualizer"
         WindowStartupLocation="CenterScreen"
-        WindowStyle="ToolWindow"
         MinHeight="300" MinWidth="500"
         Height="300" Width="500"
         d:DesignHeight="300" d:DesignWidth="500">
     <Grid>
-        <avalonedit:TextEditor x:Name="textEditor" Margin="0,0,0,23" FontFamily="Consolas" FontSize="14" FontWeight="Normal" IsReadOnly="True" />
-        <Button Content="Copy to clipboard" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="120" Height="23" Click="CopyToClipboardClick" />
-        <Button Content="Close" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="65" Height="23" Click="CloseClick" />
+        <avalonedit:TextEditor x:Name="textEditor" WordWrap="{Binding Path=IsChecked, ElementName=cbIsWordWrap}" Margin="0,0,0,23" FontFamily="Consolas" FontSize="14" FontWeight="Normal" IsReadOnly="True" />
+
+        <Button VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="130" Height="23" Click="CopyToClipboardClick">
+            <Button.Content>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="Images/clipboard.png" RenderOptions.BitmapScalingMode="NearestNeighbor" RenderOptions.EdgeMode="Aliased" Width="16" Height="16" Margin="0,0,4,0" />
+                    <TextBlock Text="Copy to clipboard" />
+                </StackPanel>
+            </Button.Content>
+        </Button>
+
+        <CheckBox Content="Word wrap" x:Name="cbIsWordWrap" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="150,0,0,4" />
+
+        <Button VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Height="23" Click="CloseClick">
+            <Button.Content>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="Images/close.png" RenderOptions.BitmapScalingMode="NearestNeighbor" RenderOptions.EdgeMode="Aliased" Width="16" Height="16" Margin="0,0,4,0" />
+                    <TextBlock Text="Close" />
+                </StackPanel>
+            </Button.Content>
+        </Button>
     </Grid>
 </Window>

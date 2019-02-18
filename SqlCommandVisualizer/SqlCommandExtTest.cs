@@ -20,6 +20,28 @@ namespace SqlCommandVisualizer
         }
 
         [TestMethod]
+        public void GetRawSql_Query_Int1()
+        {
+            var query = @"select * from Table where Column1=@param1";
+            var sqlCommand = new SqlCommand(query);
+            sqlCommand.Parameters.AddWithValue("@param1", 10);
+            var actual = sqlCommand.GetRawSql();
+            var expected = @"select * from Table where Column1=10";
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void GetRawSql_Query_IntEnum()
+        {
+            var query = @"select * from Table where Column1=@param1";
+            var sqlCommand = new SqlCommand(query);
+            sqlCommand.Parameters.AddWithValue("param1", SomeEnum.One);
+            var actual = sqlCommand.GetRawSql();
+            var expected = @"select * from Table where Column1=1";
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
         public void GetRawSql_Query_String()
         {
             var query = @"select * from Table where Column1=@param1";
@@ -85,6 +107,11 @@ namespace SqlCommandVisualizer
             var actual = sqlCommand.GetRawSql();
             var expected = @"exec [ProcedureName] [@param1]=10, [@param2]='string'";
             Assert.AreEqual(expected, actual);
+        }
+
+        enum SomeEnum
+        {
+            One = 1, Two = 2
         }
     }
 }

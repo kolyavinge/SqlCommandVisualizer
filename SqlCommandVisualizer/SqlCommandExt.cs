@@ -60,6 +60,8 @@ namespace SqlCommandVisualizer
         {
             switch (parameter.SqlDbType)
             {
+                case SqlDbType.Int:
+                    return ((int)parameter.Value).ToString();
                 case SqlDbType.Float:
                     return ((double)parameter.Value).ToString("G", CultureInfo.InvariantCulture);
                 case SqlDbType.Decimal:
