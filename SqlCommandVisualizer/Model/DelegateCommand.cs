@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace SqlCommandVisualizer.Utils
+namespace SqlCommandVisualizer.Model
 {
     public class DelegateCommand : ICommand
     {

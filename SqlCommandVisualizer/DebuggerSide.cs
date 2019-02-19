@@ -1,4 +1,6 @@
 ﻿using Microsoft.VisualStudio.DebuggerVisualizers;
+using SqlCommandVisualizer.View;
+using SqlCommandVisualizer.ViewModel;
 using System;
 using System.Data.SqlClient;
 using System.Diagnostics;

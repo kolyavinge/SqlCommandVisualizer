@@ -56,18 +56,19 @@
   <ItemGroup>
     <Compile Include="DebuggerSide.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SqlCommandVisualizerView.xaml.cs">
+    <Compile Include="Controls\BindableAvalonEditor.cs" />
+    <Compile Include="View\SqlCommandVisualizerView.xaml.cs">
       <DependentUpon>SqlCommandVisualizerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="SqlCommandExt.cs" />
     <Compile Include="SqlCommandExtTest.cs" />
-    <Compile Include="SqlCommandVisualizerViewModel.cs" />
+    <Compile Include="ViewModel\SqlCommandVisualizerViewModel.cs" />
     <Compile Include="SqlVisualizerConfigManager.cs" />
     <Compile Include="SSMSManager.cs" />
-    <Compile Include="Utils\DelegateCommand.cs" />
+    <Compile Include="Model\DelegateCommand.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="SqlCommandVisualizerView.xaml">
+    <Page Include="View\SqlCommandVisualizerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
