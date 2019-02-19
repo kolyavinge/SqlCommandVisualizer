@@ -25,28 +25,10 @@ namespace SqlCommandVisualizer
 
         public void ShowDialog(string rawSql)
         {
-            var configManager = new SqlVisualizerConfigManager();
-            var configSettings = configManager.LoadConfigSettings();
-
-            var view = new SqlCommandVisualizerView();
-            if (configSettings.IsMaximized)
-            {
-                view.WindowState = System.Windows.WindowState.Maximized;
-            }
-            else
-            {
-                view.Width = configSettings.MainWindowWidth;
-                view.Height = configSettings.MainWindowHeight;
-            }
-            view.textEditor.Text = rawSql;
-            view.cbIsWordWrap.IsChecked = configSettings.IsWordWrap;
+            var vm = new SqlCommandVisualizerViewModel();
+            var view = new SqlCommandVisualizerView { DataContext = vm };
             view.ShowDialog();
-
-            configSettings.IsMaximized = view.WindowState == System.Windows.WindowState.Maximized;
-            configSettings.MainWindowWidth = view.Width;
-            configSettings.MainWindowHeight = view.Height;
-            configSettings.IsWordWrap = view.cbIsWordWrap.IsChecked ?? false;
-            configManager.SaveConfigSettings(configSettings);
+            vm.Close();
         }
     }
 

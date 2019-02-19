@@ -34,7 +34,7 @@
   <ItemGroup>
     <Reference Include="ICSharpCode.AvalonEdit, Version=5.0.3.0, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\ICSharpCode.AvalonEdit.dll</HintPath>
+      <HintPath>dll\ICSharpCode.AvalonEdit.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.DebuggerVisualizers, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
@@ -61,7 +61,10 @@
     </Compile>
     <Compile Include="SqlCommandExt.cs" />
     <Compile Include="SqlCommandExtTest.cs" />
+    <Compile Include="SqlCommandVisualizerViewModel.cs" />
     <Compile Include="SqlVisualizerConfigManager.cs" />
+    <Compile Include="SSMSManager.cs" />
+    <Compile Include="Utils\DelegateCommand.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="SqlCommandVisualizerView.xaml">
@@ -86,8 +89,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy "SqlCommandVisualizer.dll" "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\Packages\Debugger\Visualizers\"
-copy "SqlCommandVisualizer.pdb" "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\Packages\Debugger\Visualizers\"
-copy "ICSharpCode.AvalonEdit.dll" "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\Packages\Debugger\Visualizers\"</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>

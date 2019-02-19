@@ -11,12 +11,25 @@ namespace SqlCommandVisualizer
 {
     public class SqlVisualizerConfigManager
     {
-        private string _configFileName = "SqlCommandVisualizerConfigSettings.xml";
+        private readonly string _configFileName = "SqlCommandVisualizerConfigSettings.xml";
 
         public ConfigSettings LoadConfigSettings()
         {
             var configFileFullPath = Path.Combine(GetConfigFilePath(), _configFileName);
             if (File.Exists(configFileFullPath))
+            {
+                var configSettings = TryToDeserializeConfigSettings(configFileFullPath);
+                return configSettings ?? new ConfigSettings();
+            }
+            else
+            {
+                return new ConfigSettings();
+            }
+        }
+
+        private ConfigSettings TryToDeserializeConfigSettings(string configFileFullPath)
+        {
+            try
             {
                 var serializer = new XmlSerializer(typeof(ConfigSettings));
                 using (var fs = new FileStream(configFileFullPath, FileMode.OpenOrCreate))
@@ -24,9 +37,9 @@ namespace SqlCommandVisualizer
                     return (ConfigSettings)serializer.Deserialize(fs);
                 }
             }
-            else
+            catch (Exception)
             {
-                return new ConfigSettings();
+                return null;
             }
         }
 
@@ -57,12 +70,15 @@ namespace SqlCommandVisualizer
 
         public bool IsWordWrap { get; set; }
 
+        public string SSMSFullExePath { get; set; }
+
         public ConfigSettings()
         {
             IsMaximized = false;
             MainWindowWidth = 600;
             MainWindowHeight = 400;
             IsWordWrap = false;
+            SSMSFullExePath = @"C:\Program Files (x86)\Microsoft SQL Server\140\Tools\Binn\ManagementStudio\Ssms.exe";
         }
     }
 }

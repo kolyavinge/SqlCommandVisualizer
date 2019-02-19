@@ -19,20 +19,5 @@ namespace SqlCommandVisualizer
                 }
             }
         }
-
-        private void CopyToClipboardClick(object sender, RoutedEventArgs e)
-        {
-            Clipboard.SetText(textEditor.Text);
-        }
-
-        private void CloseClick(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
-
-        private void OpenInSSMSClick(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

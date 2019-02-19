@@ -12,9 +12,9 @@
         Height="300" Width="500"
         d:DesignHeight="300" d:DesignWidth="500">
     <Grid>
-        <avalonedit:TextEditor x:Name="textEditor" WordWrap="{Binding Path=IsChecked, ElementName=cbIsWordWrap}" Margin="0,0,0,23" FontFamily="Consolas" FontSize="14" FontWeight="Normal" IsReadOnly="True" />
+        <avalonedit:TextEditor Text="{Binding SqlText}" WordWrap="{Binding Path=IsChecked, ElementName=cbIsWordWrap}" Margin="0,0,0,23" FontFamily="Consolas" FontSize="14" FontWeight="Normal" IsReadOnly="True" />
 
-        <Button VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="130" Height="23" Click="CopyToClipboardClick">
+        <Button VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="130" Height="23" Command="{Binding CopyToClipboardCommand}">
             <Button.Content>
                 <StackPanel Orientation="Horizontal">
                     <Image Source="Images/clipboard.png" RenderOptions.BitmapScalingMode="NearestNeighbor" RenderOptions.EdgeMode="Aliased" Width="16" Height="16" Margin="0,0,4,0" />
