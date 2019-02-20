@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace SqlCommandVisualizer
@@ -47,6 +43,7 @@ namespace SqlCommandVisualizer
         {
             var configFileFullPath = Path.Combine(GetConfigFilePath(), _configFileName);
             var serializer = new XmlSerializer(typeof(ConfigSettings));
+            File.Delete(configFileFullPath);
             using (var fs = new FileStream(configFileFullPath, FileMode.OpenOrCreate))
             {
                 serializer.Serialize(fs, configSettings);

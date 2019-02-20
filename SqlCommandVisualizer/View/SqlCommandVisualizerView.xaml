@@ -3,16 +3,27 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:controls="clr-namespace:SqlCommandVisualizer.Controls"
+        xmlns:view="clr-namespace:SqlCommandVisualizer.Controls"
+        xmlns:converters="clr-namespace:SqlCommandVisualizer.Converters"
         mc:Ignorable="d"
         Icon="../Images/main_window.png"
         Title="SqlCommand Visualizer"
+        MinWidth="500"
+        MinHeight="300"
         WindowStartupLocation="CenterScreen"
-        MinHeight="300" MinWidth="500"
-        Height="300" Width="500"
+        Width="{Binding WindowWidth, Mode=TwoWay}"
+        Height="{Binding WindowHeight, Mode=TwoWay}"
         d:DesignHeight="300" d:DesignWidth="500">
+    <Window.Resources>
+        <ResourceDictionary>
+            <converters:WindowStateMaximizedConverter x:Key="WindowStateMaximizedConverter" />
+        </ResourceDictionary>
+    </Window.Resources>
+    <Window.WindowState>
+        <Binding Path="IsMaximized" Converter="{StaticResource ResourceKey=WindowStateMaximizedConverter}"/>
+    </Window.WindowState>
     <Grid>
-        <controls:BindableAvalonEditor x:Name="textEditor" Margin="0,0,0,23" />
+        <view:BindableAvalonEditor Text="{Binding SqlText}" WordWrap="{Binding IsWordWrap}" FontFamily="Consolas" FontSize="14" Margin="0,0,0,23" />
 
         <Button VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="130" Height="23" Command="{Binding CopyToClipboardCommand}">
             <Button.Content>
@@ -23,7 +34,7 @@
             </Button.Content>
         </Button>
 
-        <Button VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="138,0,0,0" Width="130" Height="23">
+        <Button VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="138,0,0,0" Width="130" Height="23" Command="{Binding OpenInSSMSCommand}">
             <Button.Content>
                 <StackPanel Orientation="Horizontal">
                     <Image Source="../Images/ssms.png" RenderOptions.BitmapScalingMode="NearestNeighbor" RenderOptions.EdgeMode="Aliased" Width="16" Height="16" Margin="0,0,4,0" />
@@ -32,9 +43,9 @@
             </Button.Content>
         </Button>
 
-        <CheckBox Content="Word wrap" x:Name="cbIsWordWrap" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="275,0,0,4" />
+        <CheckBox Content="Word wrap" IsChecked="{Binding IsWordWrap}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="275,0,0,4" />
 
-        <Button VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Height="23">
+        <Button VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Height="23" Command="{Binding CloseCommand}">
             <Button.Content>
                 <StackPanel Orientation="Horizontal">
                     <Image Source="../Images/close.png" RenderOptions.BitmapScalingMode="NearestNeighbor" RenderOptions.EdgeMode="Aliased" Width="16" Height="16" Margin="0,0,4,0" />

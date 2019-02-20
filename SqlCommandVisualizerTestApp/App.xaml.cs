@@ -220,7 +220,7 @@ GO
 
 ";
 
-            var visualizer = new SqlCommandVisualizer.SqlCommandVisualizer();
+            var visualizer = new SqlCommandVisualizer.SqlCommandDialogDebuggerVisualizer();
             visualizer.ShowDialog(query);
 
             var cmd = new SqlCommand(query);

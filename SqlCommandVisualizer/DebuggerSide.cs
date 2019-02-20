@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.DebuggerVisualizers;
+using SqlCommandVisualizer;
 using SqlCommandVisualizer.View;
 using SqlCommandVisualizer.ViewModel;
 using System;
@@ -7,7 +8,7 @@ using System.Diagnostics;
 using System.IO;
 
 [assembly: DebuggerVisualizer(
-typeof(SqlCommandVisualizer.SqlCommandVisualizer),
+typeof(SqlCommandVisualizer.SqlCommandDialogDebuggerVisualizer),
 typeof(SqlCommandVisualizer.SqlCommandVisualizerObjectSource),
 Target = typeof(SqlCommand),
 Description = "SqlCommand Visualizer")]
@@ -17,7 +18,7 @@ namespace SqlCommandVisualizer
     /// <summary>
     /// Визуализатор
     /// </summary>
-    public class SqlCommandVisualizer : DialogDebuggerVisualizer
+    public class SqlCommandDialogDebuggerVisualizer : DialogDebuggerVisualizer
     {
         protected override void Show(IDialogVisualizerService windowService, IVisualizerObjectProvider objectProvider)
         {
@@ -28,9 +29,10 @@ namespace SqlCommandVisualizer
         public void ShowDialog(string rawSql)
         {
             var vm = new SqlCommandVisualizerViewModel();
+            vm.SqlText = rawSql;
             var view = new SqlCommandVisualizerView { DataContext = vm };
+            vm.OnClose += (s, e) => view.Close();
             view.ShowDialog();
-            vm.Close();
         }
     }
 
