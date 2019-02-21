@@ -65,7 +65,7 @@
     <Compile Include="SqlCommandExtTest.cs" />
     <Compile Include="ViewModel\SqlCommandVisualizerViewModel.cs" />
     <Compile Include="SqlVisualizerConfigManager.cs" />
-    <Compile Include="SSMSManager.cs" />
+    <Compile Include="TempFileManager.cs" />
     <Compile Include="Model\DelegateCommand.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -96,12 +97,13 @@ namespace SqlCommandVisualizer.ViewModel
             Clipboard.SetText(SqlText);
         }
 
-        public ICommand OpenInSSMSCommand { get { return new DelegateCommand(OpenInSSMS); } }
+        public ICommand OpenAsSqlFileCommand { get { return new DelegateCommand(OpenAsSqlFile); } }
 
-        private void OpenInSSMS()
+        private void OpenAsSqlFile()
         {
-            var ssmsManager = new SSMSManager();
-            //ssmsManager.Check()
+            var tempFileManager = new TempFileManager();
+            var tmpSqlFile = tempFileManager.GetTempFile(SqlText, "sql");
+            Process.Start(tmpSqlFile);
         }
 
         public ICommand CloseCommand { get { return new DelegateCommand(Close); } }
