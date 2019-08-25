@@ -23,7 +23,7 @@
         <Binding Path="IsMaximized" Converter="{StaticResource ResourceKey=WindowStateMaximizedConverter}"/>
     </Window.WindowState>
     <Grid>
-        <view:BindableAvalonEditor Text="{Binding SqlText}" WordWrap="{Binding IsWordWrap}" FontFamily="Consolas" FontSize="14" Margin="0,0,0,23" />
+        <view:BindableAvalonEditor Text="{Binding SqlText}" WordWrap="{Binding IsWordWrap}" IsReadOnly="True" FontFamily="Consolas" FontSize="14" Margin="0,0,0,23" />
 
         <Button VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="130" Height="23" Command="{Binding CopyToClipboardCommand}">
             <Button.Content>

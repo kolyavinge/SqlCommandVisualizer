@@ -9,15 +9,53 @@ namespace SqlCommandVisualizer
 {
     public static class SqlCommandExt
     {
-        public static string GetRawSql(this SqlCommand sqlCommand)
+        public class SqlText
+        {
+            public SqlText(string rawSqlText)
+            {
+                RawSqlText = rawSqlText;
+            }
+
+            public string RawSqlText { get; private set; }
+
+            public string FormatedSqlText
+            {
+                get
+                {
+                    var lines = RawSqlText.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+                    var maxLeadSpacesCount = lines.Select(GetLeadSpacesCount).Where(x => x > 0).Min();
+                    for (int i = 0; i < lines.Length; i++)
+                    {
+                        if (lines[i][0] == ' ')
+                        {
+                            lines[i] = lines[i].Substring(maxLeadSpacesCount);
+                        }
+                    }
+
+                    return string.Join(Environment.NewLine, lines);
+                }
+            }
+
+            private int GetLeadSpacesCount(string s)
+            {
+                int leadSpacesCount = 0;
+                while (leadSpacesCount < s.Length && s[leadSpacesCount] == ' ') leadSpacesCount++;
+
+                return leadSpacesCount;
+            }
+        }
+
+        public static SqlText GetSqlText(this SqlCommand sqlCommand)
         {
             if (sqlCommand.CommandType == CommandType.Text)
             {
-                return GetRawSqlForText(sqlCommand);
+                var rawSql = GetRawSqlForText(sqlCommand);
+                return new SqlText(rawSql);
             }
             else if (sqlCommand.CommandType == CommandType.StoredProcedure)
             {
-                return GetRawSqlForProcedure(sqlCommand);
+                var rawSql = GetRawSqlForProcedure(sqlCommand);
+                return new SqlText(rawSql);
             }
             else
             {

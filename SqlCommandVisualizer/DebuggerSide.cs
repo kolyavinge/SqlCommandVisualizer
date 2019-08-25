@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.DebuggerVisualizers;
-using SqlCommandVisualizer;
 using SqlCommandVisualizer.View;
 using SqlCommandVisualizer.ViewModel;
 using System;
@@ -23,7 +22,7 @@ namespace SqlCommandVisualizer
         protected override void Show(IDialogVisualizerService windowService, IVisualizerObjectProvider objectProvider)
         {
             var wrapper = (SqlCommandWrapper)objectProvider.GetObject();
-            ShowDialog(wrapper.RawSql);
+            ShowDialog(wrapper.SqlText);
         }
 
         public void ShowDialog(string rawSql)
@@ -57,9 +56,9 @@ namespace SqlCommandVisualizer
     {
         public SqlCommandWrapper(SqlCommand sqlCommand)
         {
-            RawSql = sqlCommand.GetRawSql().Trim();
+            SqlText = sqlCommand.GetSqlText().FormatedSqlText;
         }
 
-        public string RawSql { get; private set; }
+        public string SqlText { get; private set; }
     }
 }
